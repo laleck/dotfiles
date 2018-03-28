@@ -1,0 +1,10 @@
+##set editing-mode vi
+##set keymap vi-insert
+##"jj": "\e"
+##Control-Rubout: backward-kill-word 
+### \e denotes option
+### \e[A denotes up arrow
+### See http://vim.wikia.com/wiki/Use_vi_shortcuts_in_terminal#well-formed-example-inputrc for more shortcuts
+##set keymap vi-command
+##Rubout: backward-kill-word
+##"v": "i"
