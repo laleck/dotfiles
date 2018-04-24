@@ -1,6 +1,7 @@
+# Run source .bashrc after changing to update existing terminal window
 # Colored ls output (colors vary by type of file)
 export CLICOLOR=1
-export LSCOLORS=DxFxCxDxBxegedabagaced
+export LSCOLORS=DxFxBxDxCxegedabagaced
 alias ls='ls -G'
 
 # Change prompt (Lucas: Directory) color
