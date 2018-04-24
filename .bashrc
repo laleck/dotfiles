@@ -11,4 +11,3 @@ alias ls='ls -G'
 # eg config add .bash_profile; config commit -m "very meaningful message"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 #config config --local status.showUntrackedFiles no
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
