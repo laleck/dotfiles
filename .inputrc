@@ -1,3 +1,9 @@
+# Fills in existing text using Tab if only 1 option
+# Otherwises fills in existing text as much as possible
+set show-all-if-ambiguous on
+
+# Vi Key Mappings for Terminal.
+# Didn't find this very useful
 ##set editing-mode vi
 ##set keymap vi-insert
 ##"jj": "\e"
