@@ -1,3 +1,5 @@
+# Use MacVim rather than system
+alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 # Run source .bashrc after changing to update existing terminal window
 # Colored ls output (colors vary by type of file)
 export CLICOLOR=1
