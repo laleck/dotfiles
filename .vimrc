@@ -1,4 +1,21 @@
-filetype plugin indent on
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim' " required
+Plugin 'tpope/vim-fugitive'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" ***** ***** ***** ***** ***** ***** ***** ***** ***** 
+
 "Show existing tab with 2 spaces width
 set tabstop=2
 "When indenting with '>', use 2 spaces width
