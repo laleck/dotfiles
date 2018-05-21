@@ -44,8 +44,8 @@ noremap <Right> gt
 " paste from most recent yank register
 noremap <c-p> "0p 
 " override default L and H methods which I never use
-noremap L g_a
-noremap H ^i
+noremap L g_
+noremap H ^
 " faster, more intuitive redo 
 nnoremap U <c-r> 
 
