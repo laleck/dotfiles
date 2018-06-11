@@ -34,6 +34,8 @@ set pastetoggle=<f5>
 set number
 set autoindent
 set breakindent
+" The / g flag on :%s substitions by default
+set gdefault
 " Easy and intuitive buffer and split-view navigation
 noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k 
@@ -66,6 +68,24 @@ set autoread
 " colo desert
 colo Spacegray " use this for terminal only, use desert for macvim (.gvimrc)
 " colo dracula
+" Ignore files that vim doesn't use
+set wildignore+=.git,.hg,.svn
+set wildignore+=.steam,.cache
+set wildignore+=*.aux,*.out,*.toc
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest,*.rbc,*.class
+set wildignore+=*.ai,*.bmp,*.gif,*.ico,*.jpg,*.jpeg,*.png,*.psd,*.webp
+set wildignore+=*.avi,*.divx,*.mp4,*.webm,*.mov,*.m2ts,*.mkv,*.vob,*.mpg,*.mpeg
+set wildignore+=*.mp3,*.oga,*.ogg,*.wav,*.flac
+set wildignore+=*.eot,*.otf,*.ttf,*.woff
+set wildignore+=*.doc,*.pdf,*.cbr,*.cbz
+set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz,*.kgb
+set wildignore+=*.swp,.lock,.DS_Store,._*
+
+" Markdown support
+autocmd BufNewFile,BufRead *.md set wrap
+autocmd BufNewFile,BufRead *.md nnoremap j gj
+autocmd BufNewFile,BufRead *.md nnoremap k gk
+
 hi Visual term=reverse ctermfg=251 ctermbg=60 guifg=#D0D0D0 guibg=#5F5F87
 " Syntastic
 set statusline+=%#warningmsg#
