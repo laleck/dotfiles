@@ -37,10 +37,14 @@ set breakindent
 " The / g flag on :%s substitions by default
 set gdefault
 " Easy and intuitive buffer and split-view navigation
+noremap <c-h> <c-w>h
 noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k 
-noremap <c-h> gT 
-noremap <c-l> gt
+noremap <c-l> <c-w>l
+noremap <c-v> <c-w>v
+noremap <c-s> <c-w>s
+" noremap <c-h> gT 
+" noremap <c-l> gt
 noremap <Left> gT
 noremap <Right> gt
 " paste from most recent yank register
@@ -81,8 +85,9 @@ set wildignore+=*.doc,*.pdf,*.cbr,*.cbz
 set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz,*.kgb
 set wildignore+=*.swp,.lock,.DS_Store,._*
 
-" Markdown support
-autocmd BufNewFile,BufRead *.md set wrap
+" Markdown support + authomatic text width formatting
+autocmd BufRead,BufNewFile *.txt setlocal formatoptions+=a
+autocmd BufRead,BufNewFile *.md setlocal formatoptions+=a
 autocmd BufNewFile,BufRead *.md nnoremap j gj
 autocmd BufNewFile,BufRead *.md nnoremap k gk
 
@@ -91,6 +96,8 @@ hi Visual term=reverse ctermfg=251 ctermbg=60 guifg=#D0D0D0 guibg=#5F5F87
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+" Doesn't ask to save buffer when navigating away (until exit)
+set hidden 
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
