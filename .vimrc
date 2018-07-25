@@ -22,6 +22,7 @@ filetype plugin indent on    " required
 
 "Show existing tab with 2 spaces width
 set tabstop=2
+set textwidth=80
 "When indenting with '>', use 2 spaces width
 set shiftwidth=2
 " No splash screen
@@ -42,9 +43,7 @@ noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k 
 noremap <c-l> <c-w>l
 noremap <c-v> <c-w>v
-noremap <c-s> <c-w>s
-" noremap <c-h> gT 
-" noremap <c-l> gt
+noremap <c-b> <c-w>s
 noremap <Left> gT
 noremap <Right> gt
 " paste from most recent yank register
@@ -63,9 +62,12 @@ nnoremap U <c-r>
 
 :imap jj <Esc>
 syntax  on
-"Keeps new lines tabbed in accordance with parent (useful for .txt, .Rmd files, can specify this in FileType)
-"-= disables comment continutation
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" When .txt or .md file is opened, set automatic text width formatting (even
+" in insert mode)
+autocmd BufRead,BufNewFile *.txt,*.md setlocal formatoptions+=a
+" Stop comment continuation, See help fo-table for more info 
+" using set formatoptions=... doens't work, has to be autocmd, why?
+autocmd FileType * set formatoptions=tq
 "Automatically loads changes to opened files without alerting
 set autoread
 "Change the colorscheme so people know you mean business
@@ -86,8 +88,6 @@ set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz,*.kgb
 set wildignore+=*.swp,.lock,.DS_Store,._*
 
 " Markdown support + authomatic text width formatting
-autocmd BufRead,BufNewFile *.txt setlocal formatoptions+=a
-autocmd BufRead,BufNewFile *.md setlocal formatoptions+=a
 autocmd BufNewFile,BufRead *.md nnoremap j gj
 autocmd BufNewFile,BufRead *.md nnoremap k gk
 
