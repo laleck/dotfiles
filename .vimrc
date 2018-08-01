@@ -42,8 +42,9 @@ noremap <c-h> <c-w>h
 noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k 
 noremap <c-l> <c-w>l
-noremap <c-v> <c-w>v
-noremap <c-b> <c-w>s
+noremap <Space>v <c-w>v
+noremap <Space>h <c-w>s
+noremap <Space>q :q<CR>
 noremap <Left> gT
 noremap <Right> gt
 " paste from most recent yank register
