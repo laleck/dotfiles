@@ -22,7 +22,6 @@ filetype plugin indent on    " required
 
 "Show existing tab with 2 spaces width
 set tabstop=2
-set textwidth=80
 "When indenting with '>', use 2 spaces width
 set shiftwidth=2
 " No splash screen
@@ -65,7 +64,7 @@ nnoremap U <c-r>
 syntax  on
 " When .txt or .md file is opened, set automatic text width formatting (even
 " in insert mode)
-autocmd BufRead,BufNewFile *.txt,*.md setlocal formatoptions+=a
+autocmd BufRead,BufNewFile *.txt,*.md setlocal formatoptions+=aw
 " Stop comment continuation, See help fo-table for more info 
 " using set formatoptions=... doens't work, has to be autocmd, why?
 autocmd FileType * set formatoptions=tq
