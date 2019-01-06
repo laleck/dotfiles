@@ -24,6 +24,7 @@ filetype plugin indent on    " required
 set tabstop=2
 "When indenting with '>', use 2 spaces width
 set shiftwidth=2
+set tw=80
 " No splash screen
 set shortmess+=I
 " In lieu of using :NoMatchParen on every buffer, this will turn off paren highlighting
@@ -46,8 +47,11 @@ noremap <Space>h <c-w>s
 noremap <Space>q :q<CR>
 noremap <Left> gT
 noremap <Right> gt
+"retain normal paste functionality using control, use non-recursive mapping! 
+noremap <c-p> ""p 
 " paste from most recent yank register
-noremap <c-p> "0p 
+noremap p "0p 
+noremap P "0P 
 " override default L and H methods which I never use
 noremap L g_
 noremap H ^
@@ -64,7 +68,7 @@ nnoremap U <c-r>
 syntax  on
 " When .txt or .md file is opened, set automatic text width formatting (even
 " in insert mode)
-autocmd BufRead,BufNewFile *.txt,*.md setlocal formatoptions+=aw
+autocmd BufRead,BufNewFile *.txt,*.md setlocal formatoptions+=w
 " Stop comment continuation, See help fo-table for more info 
 " using set formatoptions=... doens't work, has to be autocmd, why?
 autocmd FileType * set formatoptions=tq
