@@ -68,7 +68,7 @@ nnoremap U <c-r>
 syntax  on
 " When .txt or .md file is opened, set automatic text width formatting (even
 " in insert mode)
-autocmd BufRead,BufNewFile *.txt,*.md setlocal formatoptions+=w
+autocmd BufRead,BufNewFile *.txt,*.md setlocal formatoptions+=wa
 " Stop comment continuation, See help fo-table for more info 
 " using set formatoptions=... doens't work, has to be autocmd, why?
 autocmd FileType * set formatoptions=tq
