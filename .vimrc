@@ -49,6 +49,8 @@ noremap <Left> gT
 noremap <Right> gt
 "retain normal paste functionality using control, use non-recursive mapping! 
 noremap <c-p> ""p 
+" let cuts go to yank register
+noremap x "0x
 " paste from most recent yank register
 noremap p "0p 
 noremap P "0P 
