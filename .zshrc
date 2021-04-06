@@ -7,10 +7,17 @@ alias ls='ls -G'
 #alias mysql="/usr/local/mysql/bin/mysql"
 alias git-school='ssh-add -D;ssh-add ~/.ssh/school'
 alias git-self='ssh-add -D;ssh-add ~/.ssh/id_rsa'
-alias ssh-pi='ssh pi@192.168.0.175'
+alias ssh-pi='ssh pi@10.0.0.19'
+
+# See https://medium.com/faun/zero-to-hero-set-up-your-mac-for-software-development-919ede3df83b
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
 
 # vim-superman plugin. Open man pages with vim
-export PATH="$PATH:$HOME/.vim/bundle/vim-superman/bin"
+#export PATH="$PATH:$HOME/.vim/bundle/vim-superman/bin"
 
 # Basic auto/tab complete:
 autoload -U compinit
@@ -45,5 +52,5 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # Supposed to be used for easier fzf. Can't get to work
 # bindkey "ç" fzf-cd-widget
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_OPS="--extended"
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# export FZF_DEFAULT_OPS="--extended"
