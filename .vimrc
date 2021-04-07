@@ -51,6 +51,9 @@ xmap <leader>mba <Plug>(vmath_plus#visual_analyze_buffer)
 nmap <leader>mr <Plug>(vmath_plus#report)
 nmap <leader>mbr <Plug>(vmath_plus#report_buffer)
 
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gl :Glog<CR>
+
 let g:tex_flavor = 'latex'
 " On write, update browser/preview
 let vim_markdown_preview_hotkey='<Leader>mp'
@@ -113,6 +116,13 @@ set formatoptions=tcqj
 " to turn off search highlighting
 set nohlsearch
 colo dracula
+set undofile " persistent undo
+set undodir=~/.vim/undo
+set backup
+set backupdir=~/.vim/backup
+" localize swp files
+set dir=~/.vim/swap
+
 
 " View nonbreaking whitespace
 " set lcs=tab:╋━,trail:·,nbsp:␣
@@ -123,8 +133,7 @@ colo dracula
 " show utf-8 code in hex on statusline
 " enter utf-8 code by typing ^vu[4 digit hex code]
 " set statusline=%B
-"Automatically loads changes to opened files without alerting
-" TODO 
+" make current buffer's directory the local directory
 " autocmd BufEnter * silent! lcd %:p:h
 " Use %% as macro for current buffer's directory from Practical Vim
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -182,14 +191,6 @@ noremap <Leader>f zfzc
 vnoremap <Left> zfzc
 nnoremap <Left> zc
 nnoremap <Right> zo
-
-noremap <S-Tab> zc
-" noremap <Tab> zo "don't use this, kills <c-i>
-" highlight FoldColumn  gui=bold    
-" highlight Folded      gui=italic  
-" highlight LineNr      gui=NONE    
-
-"
 " override default L and H methods which I never use
 " go to first/last character of line
 noremap H ^
@@ -204,13 +205,13 @@ noremap gL g$
 " For netrw mappings: :h netrw-quickmap or see danidiaz github cheatsheet
 " using <c-r>= causes ex mode to evaluate the vimscript
 noremap <c-n> :Lex! <c-r>=expand('%:p:h')<CR><CR>
-noremap <Leader>n :Lex! 
 
 " From practical vim, navigate ex mode history with home row while retaining history filtering that arrow keys provide
 cnoremap <c-p> <Up>
 cnoremap <c-n> <Down>
 
 " Commands
+command! Diff diffsplit ~/.vim/backup/%:t~
 command! ClearRegs for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
 " Pretty Print JSON, HTML, and XML (set vim directory to match file)
 command! PPJ %!python -m json.tool
@@ -226,10 +227,10 @@ function SetPlaintext()
     " set wrap " wrap visible lines
     setlocal linebreak " stop words from cutting off and carrying over onto next visible line when wrapping
     setlocal breakindent " indented space carries over from one line to the next
-    setlocal fo+=a " paragraphs all on 1 line. uses tw=79 at a minimum. continuously enforce tw limits when inserting on existing line.
+    setlocal fo+=a " paragraphs all on 1 line. sets tw=79 at a minimum. continuously enforce tw limits when inserting on existing line.
     setlocal fo+=w " makes 'a' work a bit nicer. Leave no trailing whitespace to denote paragraph has ended
     setlocal nojoinspaces " stop double spaces after punctuation
-    setlocal foldopen-=block " don't let most navigational jumps open folds
+    setlocal foldopen-=block " stop  most navigational jumps from opening folds
     setlocal foldmethod=marker
     " Remappings below apply to all buffers opened
     nnoremap j gj
@@ -250,11 +251,3 @@ set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz,*.kgb
 set wildignore+=*.swp,.lock,.DS_Store,._*
 
 hi Visual term=reverse ctermfg=251 ctermbg=60 guifg=#D0D0D0 guibg=#5F5F87
-"" Syntastic
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-" if you want to search all buffers, try
-" :bufdo! %s/FIND/REPLACE/g
-" def function:
-"autocmd BufRead,BufNewFile *.py setlocal nnoremap gd 
