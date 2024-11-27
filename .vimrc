@@ -180,6 +180,7 @@ set splitright " open new splits on right
 set autoread
 set shortmess+=I
 set foldmethod=syntax
+set nofoldenable "turn off folding by default; toggle with zi
 set showcmd " show command building keystrokes in normal mode
 set gdefault " show command building keystrokes in normal mode
 set ignorecase
@@ -197,8 +198,7 @@ set viminfo='500,f1,<50,s10,:200,h,n~/.vim/viminfo " backup settings for registe
 
 set spelllang=en_us
 set spelloptions=camel
-" syn match myExCapitalWords +\<\w*[A-Z]\S*\>+ contains=@NoSpell
-syn match ALLCAP +\<\u\u*\>+ contains=@NoSpell
+syn match myExCapitalWords +\<[A-Z]\w*\>+ contains=@NoSpell "IF IM YELLIN IDC BOUT SPELING
 
 "View nonbreaking whitespace
 " set list
@@ -270,7 +270,6 @@ noremap gL g$
 nnoremap <c-_> <c-^>
 nnoremap <Leader>q :q<CR>
 
-
 " from practical vim,
 " nnoremap <silent> <c-l> :<C-u>nohlsearch<CR><c-l>
 
@@ -303,7 +302,9 @@ nnoremap <leader>fo :set fo-=a;set tw=0<CR>
 nnoremap <leader>cr :ClearRegs<CR>
 nnoremap <leader>cc :ccl<CR>
 
-" Commands
+"
+" Commands and Functions
+"
 command! Diff vert diffsplit ~/.vim/backup/%:t~
 command! ClearRegs for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
 " Pretty Print JSON, HTML, and XML (set vim directory to match file)
@@ -314,11 +315,11 @@ command! PPX !tidy -mi -xml -wrap 0 %
 " Open current buffer's directory in Finder window or use !open %%
 " command! CurrentDir silent !open %:h
 
-" Ideas was to make my global R mark always be at top of q&a file
-" Not a great implementation because it relies on file name but good enough
+" Idea was to make my global R mark always be at top of q&a file
+" Not a great implementation (ChatGPT), relies on file name but good enough
 augroup MyMarks
   autocmd!
-  autocmd BufEnter q&a.txt if line("'R") > 0 | execute "normal! ggmR" | endif
+  autocmd BufEnter q&a.txt if line("'R") > 1 | execute "normal! ggmR" | endif
 augroup END
 
 " autocmd
@@ -329,7 +330,6 @@ function SetBeancount()
   setlocal tw=0
 endfunction
 
-" autocmd BufRead *.wiki call SetWiki()
 autocmd BufRead *.wiki call SetVimWiki()
 function SetVimWiki()
   " setlocal tw=0
@@ -378,6 +378,7 @@ function! TrimTrailingWhitespace() abort
 endfunction
 command! TrimTrailingWhitespace execute "call TrimTrailingWhitespace()"
 
+" Collect all todos across vimwiki in quickfix list
 function! TodoSearch(filepattern)
     if a:filepattern == ""
         let l:filepattern = '**/*'
