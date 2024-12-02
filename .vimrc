@@ -7,6 +7,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
+let $PATH = $PATH . ':/Users/lucasaleck/.pyenv/shims'
 "" Git
 " gitgutter shows changes since revision but can add lots of lag
 " Plugin 'airblade/vim-gitgutter'
@@ -144,7 +145,11 @@ let g:vimwiki_list = [{'path': '~/vimwiki/', 'listsyms': '✗○◐●✓'}] " t
 "
 
 if has("gui_running")
-  set guifont=Menlo:h14
+  if hostname() =~ '^LA'
+    set guifont=Menlo:h12 " personal machine
+  else
+    set guifont=Menlo:h14 " work machines
+  endif
   set guicursor=n:blinkwait0-blinkon1-blinkoff0 "don't blink cursor in normal
   colorscheme dracula
 else
