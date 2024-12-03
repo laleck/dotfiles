@@ -304,7 +304,7 @@ nnoremap <leader>o o<C-R>=strftime("%Y-%m-%d\n")<CR>
 vnoremap <Leader>p :s/^.*$/<C-R>=strftime("%Y-%m-%d")<CR> price \0 USD/<CR>
 " vnoremap <leader>i <C-R>=strftime("%Y-%m-%d\n")<CR>
 
-nnoremap <leader>fo :set fo-=a;set tw=0<CR>
+nnoremap <leader>fo :set formatoptions-=a;set tw=0<CR>
 nnoremap <leader>cr :ClearRegs<CR>
 nnoremap <leader>cc :ccl<CR>
 
@@ -333,12 +333,12 @@ augroup END
 autocmd BufNewFile,BufRead *.bean call SetBeancount()
 function SetBeancount()
   setlocal foldopen-=block
-  setlocal tw=0
+  setlocal textwidth=0
 endfunction
 
 autocmd BufRead *.wiki call SetVimWiki()
 function SetVimWiki()
-  " setlocal tw=0
+  " setlocal textwidth=0
   setlocal nofoldenable
   setlocal spell
   " ignore sentences or phrases that start with lowercase word
@@ -347,9 +347,9 @@ endfunction
 
 autocmd BufNewFile,BufRead *.md,*.txt call SetPlaintext()
 function SetPlaintext()
-    setlocal tw=0 " no text width limit. If using this, remove 'a' from format options
+    setlocal textwidth=0 " no text width limit. If using this, remove 'a' from format options
     " setlocal fo+=a " paragraphs all on 1 line. sets tw=79 at a minimum. continuously enforce tw limits when inserting on existing line.
-    setlocal fo+=w " makes 'a' work a bit nicer. Leave no trailing whitespace to denote paragraph has ended
+    setlocal formatoptions+=w " makes 'a' work a bit nicer. Leave no trailing whitespace to denote paragraph has ended
     " set wrap " wrap visible lines
     setlocal linebreak " stop words from cutting off and carrying over onto next visible line when wrapping
     setlocal breakindent " indented space carries over from one line to the next
