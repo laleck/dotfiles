@@ -46,6 +46,7 @@ Plugin  'tpope/vim-speeddating'
 
 "" Additonal Functionality
 Plugin 'nathangrigg/vim-beancount'
+Plugin 'lambdalisue/vim-pyenv'
 " GNU recutils syntax and folding
 Plugin 'zaid/vim-rec'
 " Transposte text
