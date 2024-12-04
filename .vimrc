@@ -397,6 +397,7 @@ function! TodoSearch(filepattern)
     copen
 endfunction
 command! TODO execute 'call TodoSearch("~/vimwiki/**/*.wiki")'
+command! WORK execute 'call TodoSearch("~/vimwiki/work/**/*.wiki")'
 
 " make ctrl-p ignore files that vim doesn't use
 set wildignore+=*.git,*.hg,*.svn
