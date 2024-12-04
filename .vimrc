@@ -1,6 +1,6 @@
 let mapleader=" " "this should be asssigned before it's referenced
 " set nocompatible              " guess this is no longer required
-filetype off                  " required
+filetype off " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -9,13 +9,16 @@ Plugin 'VundleVim/Vundle.vim'
 
 let $PATH = $PATH . ':/Users/lucasaleck/.pyenv/shims'
 "" Git
+Plugin 'tpope/vim-fugitive'
 " gitgutter shows changes since revision but can add lots of lag
 " Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-fugitive'
 " Plugin 'Xuyuanp/nerdtree-git-plugin' "tbd check it out
-"
-"" Themes
+
+" Colors/themes
 Plugin 'dracula/vim', {'name': 'dracula'}
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 "" Navigation
 Plugin 'tpope/vim-unimpaired'
@@ -44,6 +47,10 @@ Plugin  'tpope/vim-speeddating'
 " Plugin 'plasticboy/vim-markdown'
 " Plugin 'JamshedVesuna/vim-markdown-preview'
 
+"" Language support
+" Plugin 'scrooloose/syntastic'
+" Plugin 'lervag/vimtex'
+
 "" Additonal Functionality
 Plugin 'nathangrigg/vim-beancount'
 Plugin 'lambdalisue/vim-pyenv'
@@ -56,14 +63,6 @@ Plugin 'EvanQuan/vmath-plus'
 " Quick search based on highlighted text
 Plugin 'nelstrom/vim-visual-star-search'
 Plugin 'vimwiki/vimwiki'
-
-" Colors/themes
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'altercation/vim-colors-solarized'
-"" Language support
-" Plugin 'scrooloose/syntastic'
-" Plugin 'lervag/vimtex'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -103,13 +102,11 @@ vnoremap <Leader>mx xi<C-r>=<C-r>"
 vnoremap <Leader>m= "myA = <C-r>=<C-r>m
 
 nnoremap <leader>gs :Git<CR>
-
 nnoremap <leader>gl :GcLog<CR>
 nnoremap <leader>ge :Gedit<CR>
 " this shows all versions for current file
 nnoremap <leader>gll :0GcLog<CR>
 nnoremap <leader>gv :Gvdiffsplit<CR>
-autocmd BufEnter fugitive://* setlocal foldmethod=syntax
 
 let g:tex_flavor = 'latex'
 " On write, update browser/preview
@@ -125,12 +122,8 @@ let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_hide = 1 " hide list_hide by default
 
 let g:vimwiki_folding='custom'
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'listsyms': '✗○◐●✓'}] " task status moved by gln and glp
-
-
-" noremap <c-n> :NERDTreeToggle<CR>
-" open nerdtreee on current buffer instead of pwd
-" noremap <leader>n :NERDTreeToggle <c-r>=expand('%:h')<CR><CR>
+" vimwiki_list broke task syntax matching
+" let g:vimwiki_list = [{'path': '~/vimwiki/', 'listsyms': '✗○◐●✓'}]
 
 " In ~/.vim/ftplugin/python.vim
 
@@ -144,14 +137,13 @@ let g:vimwiki_list = [{'path': '~/vimwiki/', 'listsyms': '✗○◐●✓'}] " t
 "
 " Basic Settings
 "
-
 if has("gui_running")
   if hostname() =~ '^LA'
     set guifont=Menlo:h12 " personal machine
   else
     set guifont=Menlo:h14 " work machines
   endif
-  set guicursor=n:blinkwait0-blinkon1-blinkoff0 "don't blink cursor in normal
+  set guicursor=n:blinkwait0-blinkon1-blinkoff0 " don't blink cursor in normal
   colorscheme dracula
 else
   set background=dark
@@ -163,75 +155,58 @@ else
   " colorscheme dracula
 endif 
 
-" amount of time between swp writes. useful for gitgutter (default 4000)
-set updatetime=100
-" set timeoutlen=1000
-" set ttimeoutlen=100
-" ***** ***** ***** ***** ***** ***** ***** ***** *****
-" set textwidth=120
-set textwidth=0
-" note tab settings are overridden when dealing with python files
+syntax on
+syntax enable
+
+" tab settings are overridden when dealing with python files
 set expandtab " tab will insert n amount of spaces instead, see softtabstop
 set tabstop=2 " number of spaces a tab counts for, my files rarely have actual tabs
 set softtabstop=2 " how many spaces a tab press inserts
 set shiftwidth=2 " indentation by 2 spaces
 set autoindent
 set breakindent
-set pastetoggle=<f5>
-set number
-set hidden " don't ask to save buffer when navigating away
-syntax on
-syntax enable
-set splitright " open new splits on right
-set autoread
-set shortmess+=I
+
+set textwidth=0
+set formatoptions=tcqj
+
 set foldmethod=syntax
-set nofoldenable "turn off folding by default; toggle with zi
+set nofoldenable " turn off folding by default; toggle with zi
+
+set pastetoggle=<f5>
+set shortmess+=I
+set number
 set showcmd " show command building keystrokes in normal mode
+
+set autoread
+set hidden " don't ask to save buffer when navigating away
+set confirm " exit vim with unsaved files
+set splitright " open new splits on right
+set updatetime=100 " amount of time between swp writes (like for gitgutter)
+
+" set incsearch
 set gdefault " default g substitute flag (all occurences on line). Add g in search to negate this; gg to ensure on
 set ignorecase
-set formatoptions=tcqj
-" set incsearch
 set nohlsearch " turn off search highlighting think this is also controlled by h in viminfo
 set nowrapscan " stop search at end of file
-set confirm " exit vim with unsaved files
+let g:loaded_matchparen=1 " think this turns off matching open/close brace highlighting
+
 set undofile " persistent undo
 set undodir=~/.vim/undo
 set backup
 set backupdir=~/.vim/backup
 set dir=~/.vim/swap " localize swp files
-set viminfo='500,f1,<50,s10,:200,h,n~/.vim/viminfo " backup settings for registers and marks, see help
+set viminfo='500,f1,<200,@200,s10,:200,h,n~/.vim/viminfo " backup settings for registers and marks, see help 'viminfo'
 
 set spelllang=en_us
 set spelloptions=camel
 syn match myExCapitalWords +\<[A-Z]\w*\>+ contains=@NoSpell "IF IM YELLIN IDC BOUT SPELING
 
-"View nonbreaking whitespace
-" set list
-" set lcs=tab:╋━,trail:·,nbsp:␣
-" set colorcolumn=80 "
-
-" set statusline=%b " localize swp files
-" show utf-8 code in hex on statusline
-" enter utf-8 code by typing ^vu[4 digit hex code]
-" set statusline=%B
-" make current buffer's directory the local directory
-" autocmd BufEnter * silent! lcd %:p:h
 "
-" Use %% as macro for current buffer's directory from Practical Vim
-cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+" Remaps
+"
+inoremap jj <Esc>
 
-" cnoremap <expr> :: getcmdtype() == ':' ? <C-u>vsplit $MYVIMRC<cr> : '::'
-" cnoremap <expr> :: getcmdtype() == ':' ? execute 'call ctrlp#init(1)' : '::'
-
-" cabbr <expr> %% expand('%:p:h')
-" In lieu of using :NoMatchParen on every buffer, this will turn off paren highlighting
-let g:loaded_matchparen=1
-
-" " insert highlighted text into ex mode
-" vnoremap <Leader>: y:<C-r>"<C-b>
-
-" These are to cancel the default behavior of d, D, c, C to put the text they delete in the default register.
+" Cancel the default behavior of d, D, c, C - do not save deletions into register (except for `-` with c, C)
 nnoremap d "_d
 vnoremap d "_d
 nnoremap D "_D
@@ -241,13 +216,14 @@ vnoremap c "_c
 nnoremap C "_C
 vnoremap C "_C
 
-inoremap jj <Esc>
+" override default L and H methods, go to first/last character of line
+noremap H ^
+noremap L g_
+noremap gH g^
+noremap gL g$
 
 " window max
-" noremap <Leader>wm <c-w>_<c-w>|
 nnoremap <Esc><Esc> :noh<Return>
-"Jump to ex mode from normal mode and cycle through previous commands
-" noremap <c-p> :<c-p>
 
 " Easy and intuitive buffer and split-view navigation
 nnoremap <c-h> <c-w>h
@@ -266,23 +242,23 @@ nnoremap <Down> gj
 vnoremap <Left> zfzc
 nnoremap <Left> zc
 nnoremap <Right> zo
-" override default L and H methods, go to first/last character of line
-noremap H ^
-noremap L g_
-noremap gH g^
-noremap gL g$
 
 " go back to last buffer (more ergonomic to use ctrl-p buffers)
 nnoremap <c-_> <c-^>
 nnoremap <Leader>q :q<CR>
 
-" from practical vim,
-" nnoremap <silent> <c-l> :<C-u>nohlsearch<CR><c-l>
+" keep cursor in place on joins. uses the z mark
+nnoremap J mzJ`z
 
-" Netrw
-" For netrw mappings: :h netrw-quickmap or see danidiaz github cheatsheet
-" using <c-r>= causes ex mode to evaluate the vimscript
-" noremap <c-n> :Lex! <c-r>=expand('%:p:h')<CR><CR>
+" insert iso-8601 date on new line below cursor and enter input
+nnoremap <leader>O O<C-R>=strftime("%Y-%m-%d\n")<CR>
+nnoremap <leader>o o<C-R>=strftime("%Y-%m-%d\n")<CR>
+" prepend current date and append USD (use for beancount price directives)
+vnoremap <Leader>p :s/^.*$/<C-R>=strftime("%Y-%m-%d")<CR> price \0 USD/<CR>
+
+nnoremap <leader>fo :set formatoptions-=a;set tw=0<CR>
+nnoremap <leader>cr :ClearRegs<CR>
+nnoremap <leader>cc :ccl<CR>
 
 " From practical vim, navigate ex mode history with home row while retaining history filtering that arrow keys provide
 cnoremap <c-p> <Up>
@@ -292,21 +268,33 @@ cnoremap <c-n> <Down>
 nnoremap <expr> n 'Nn'[v:searchforward] . "zzzv"
 nnoremap <expr> N 'nN'[v:searchforward] . "zzzv"
 
-" keep cursor in place on joins. uses the z mark
-nnoremap J mzJ`z
+" Use %% as macro for current buffer's directory from Practical Vim
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
-" insert iso-8601 date on new line below cursor and enter input
-nnoremap <leader>O O<C-R>=strftime("%Y-%m-%d\n")<CR>
-nnoremap <leader>o o<C-R>=strftime("%Y-%m-%d\n")<CR>
+" noremap <Leader>wm <c-w>_<c-w>|
 
-" prepend current date and append USD (use for beancount price directives)
-" vnoremap <Leader>i :s/^.*$/<C-R>=strftime("%Y-%m-%d")<CR> price \0 USD/<CR>
-vnoremap <Leader>p :s/^.*$/<C-R>=strftime("%Y-%m-%d")<CR> price \0 USD/<CR>
-" vnoremap <leader>i <C-R>=strftime("%Y-%m-%d\n")<CR>
+" from practical vim,
+" nnoremap <silent> <c-l> :<C-u>nohlsearch<CR><c-l>
 
-nnoremap <leader>fo :set formatoptions-=a;set tw=0<CR>
-nnoremap <leader>cr :ClearRegs<CR>
-nnoremap <leader>cc :ccl<CR>
+" Jump to ex mode from normal mode and cycle through previous commands
+" noremap <c-p> :<c-p>
+
+" insert highlighted text into ex mode
+" vnoremap <Leader>: y:<C-r>"<C-b>
+" cnoremap <expr> :: getcmdtype() == ':' ? <C-u>vsplit $MYVIMRC<cr> : '::'
+" cnoremap <expr> :: getcmdtype() == ':' ? execute 'call ctrlp#init(1)' : '::'
+
+" view nonbreaking whitespace
+" set list
+" set lcs=tab:╋━,trail:·,nbsp:␣
+" set colorcolumn=80 "
+
+" set statusline=%b " localize swp files
+" show utf-8 code in hex on statusline
+" enter utf-8 code by typing ^vu[4 digit hex code]
+" set statusline=%B
+" make current buffer's directory the local directory
+" autocmd BufEnter * silent! lcd %:p:h
 
 "
 " Commands and Functions
@@ -317,9 +305,6 @@ command! ClearRegs for i in range(34,122) | silent! call setreg(nr2char(i), []) 
 command! PPJ %!python -m json.tool
 command! PPH !tidy -mi -html -wrap 0 %
 command! PPX !tidy -mi -xml -wrap 0 %
-
-" Open current buffer's directory in Finder window or use !open %%
-" command! CurrentDir silent !open %:h
 
 " Idea was to make my global R mark always be at top of q&a file
 " Not a great implementation (ChatGPT), relies on file name but good enough
@@ -335,6 +320,8 @@ function SetBeancount()
   setlocal foldopen-=block
   setlocal textwidth=0
 endfunction
+
+autocmd BufEnter fugitive://* setlocal foldmethod=syntax
 
 autocmd BufRead *.wiki call SetVimWiki()
 function SetVimWiki()
