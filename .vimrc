@@ -188,7 +188,7 @@ set shortmess+=I
 set foldmethod=syntax
 set nofoldenable "turn off folding by default; toggle with zi
 set showcmd " show command building keystrokes in normal mode
-set gdefault " show command building keystrokes in normal mode
+set gdefault " default g substitute flag (all occurences on line). Add g in search to negate this; gg to ensure on
 set ignorecase
 set formatoptions=tcqj
 " set incsearch
