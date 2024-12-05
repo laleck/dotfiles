@@ -322,6 +322,9 @@ autocmd BufNewFile,BufRead *.bean call SetBeancount()
 function SetBeancount()
   setlocal foldopen-=block
   setlocal textwidth=0
+  " jump to my bean headings (this is lazy should save off existing ? and / registers and restore
+  nnoremap <buffer> [[ ?\*\*\*\*<CR>
+  nnoremap <buffer> ]] /\*\*\*\*<CR>
 endfunction
 
 autocmd BufEnter fugitive://* setlocal foldmethod=syntax
@@ -337,7 +340,7 @@ endfunction
 
 autocmd BufNewFile,BufRead *.md,*.txt call SetPlaintext()
 function SetPlaintext()
-    setlocal textwidth=0 " no text width limit. If using this, remove 'a' from format options
+    setlocal textwidth=0 " no text width limit. If using this,j remove 'a' from format options
     " setlocal fo+=a " paragraphs all on 1 line. sets tw=79 at a minimum. continuously enforce tw limits when inserting on existing line.
     setlocal formatoptions+=w " makes 'a' work a bit nicer. Leave no trailing whitespace to denote paragraph has ended
     " set wrap " wrap visible lines
