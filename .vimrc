@@ -257,7 +257,6 @@ nnoremap J mzJ`z
 nnoremap <leader>O O<C-R>=strftime("%Y-%m-%d\n")<CR>
 nnoremap <leader>o o<C-R>=strftime("%Y-%m-%d\n")<CR>
 " prepend current date and append USD (use for beancount price directives)
-vnoremap <Leader>p :s/^.*$/<C-R>=strftime("%Y-%m-%d")<CR> price \0 USD/<CR>
 
 nnoremap <leader>fo :set formatoptions-=a;set tw=0<CR>
 nnoremap <leader>cr :ClearRegs<CR>
@@ -322,6 +321,8 @@ autocmd BufNewFile,BufRead *.bean call SetBeancount()
 function SetBeancount()
   setlocal foldopen-=block
   setlocal textwidth=0
+  " make price directives from highlighted text copy/pasted from sheets
+  vnoremap <buffer> <Leader>p :s/^.*$/<C-R>=strftime("%Y-%m-%d")<CR> price \0 USD/<CR>
   " jump to my bean headings (this is lazy should save off existing ? and / registers and restore
   nnoremap <buffer> [[ ?\*\*\*\*<CR>
   nnoremap <buffer> ]] /\*\*\*\*<CR>
