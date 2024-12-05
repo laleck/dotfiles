@@ -183,7 +183,7 @@ set confirm " exit vim with unsaved files
 set splitright " open new splits on right
 set updatetime=100 " amount of time between swp writes (like for gitgutter)
 
-" set incsearch
+" set incsearch " match search as you type
 set gdefault " default g substitute flag (all occurences on line). Add g in search to negate this; gg to ensure on
 set ignorecase
 set nohlsearch " turn off search highlighting think this is also controlled by h in viminfo
@@ -195,10 +195,13 @@ set undodir=~/.vim/undo
 set backup
 set backupdir=~/.vim/backup
 set dir=~/.vim/swap " localize swp files
-set viminfo='500,f1,<200,@200,s10,:200,h,n~/.vim/viminfo " backup settings for registers and marks, see help 'viminfo'
+set history=200
+set viminfo='100,f1,<50,s10,h,n~/.vim/viminfo " backup settings for registers and marks, see help 'viminfo'
 
 set spelllang=en_us
 set spelloptions=camel
+" Need to review why this isn't working in vimwiki. Plugin probably overriding
+" it, might need custom syntax file - not sure how this stuff works
 syn match myExCapitalWords +\<[A-Z]\w*\>+ contains=@NoSpell "IF IM YELLIN IDC BOUT SPELING
 
 "
