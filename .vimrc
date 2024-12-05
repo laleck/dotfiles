@@ -317,7 +317,7 @@ augroup MyMarks
 augroup END
 
 " autocmd
-" Can I do just bufnewfile?
+" BufEnter when open/switch to buffer; Bufread when :e file (usually once)
 autocmd BufNewFile,BufRead *.bean call SetBeancount()
 function SetBeancount()
   setlocal foldopen-=block
@@ -329,13 +329,16 @@ endfunction
 
 autocmd BufEnter fugitive://* setlocal foldmethod=syntax
 
-autocmd BufRead *.wiki call SetVimWiki()
+" autocmd BufRead *.wiki call SetVimWiki()
+autocmd BufEnter *.wiki call SetVimWiki()
 function SetVimWiki()
   " setlocal textwidth=0
   setlocal nofoldenable
   setlocal spell
   " ignore sentences or phrases that start with lowercase word
   setlocal spellcapcheck=
+  syn match myExCapitalWords +\<[A-Z]\w*\>+ contains=@NoSpell
+  setlocal modeline " these other settings are overriding my modelines, this restores it
 endfunction
 
 autocmd BufNewFile,BufRead *.md,*.txt call SetPlaintext()
