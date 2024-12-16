@@ -99,7 +99,7 @@ vnoremap <Leader>mx xi<C-r>=<C-r>"
 " yank highlighted text to m (math) register, find '=', delete WORD, insert calculation result
 vnoremap <Leader>m= "myA = <C-r>=<C-r>m
 
-nnoremap <leader>gs :Git<CR>
+" nnoremap <leader>gs :Git<CR> " replaced with toggle function
 nnoremap <leader>gl :GcLog<CR>
 nnoremap <leader>ge :Gedit<CR>
 " this shows all versions for current file
@@ -388,6 +388,18 @@ function! TrimTrailingWhitespace() abort
   echo "-- DELETED TRAILING WHITESPACE --"
 endfunction
 command! TrimTrailingWhitespace execute "call TrimTrailingWhitespace()"
+
+" toggle fugitive git status window
+function! ToggleGstatus() abort
+  for l:winnr in range(1, winnr('$'))
+    if !empty(getwinvar(l:winnr, 'fugitive_status'))
+      exe l:winnr 'close'
+      return
+    endif
+  endfor
+  keepalt Git
+endfunction
+nnoremap <Leader>gs :call ToggleGstatus()<CR>
 
 " Collect all todos across vimwiki in quickfix list
 function! TodoSearch(filepattern)
