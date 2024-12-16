@@ -327,9 +327,9 @@ function SetBeancount()
   setlocal textwidth=0
   " make price directives from highlighted text copy/pasted from sheets
   vnoremap <buffer> <Leader>p :s/^.*$/<C-R>=strftime("%Y-%m-%d")<CR> price \0 USD/<CR>
-  " jump between bean accounts
-  nnoremap <buffer> [[ zk
-  nnoremap <buffer> ]] zj
+  " jump to my bean headings (zi and zj don't quite work)
+  nnoremap <buffer> [[ ?\*\*\*\*<CR>
+  nnoremap <buffer> ]] /\*\*\*\*<CR>
 endfunction
 
 autocmd BufEnter fugitive://* setlocal foldmethod=syntax
