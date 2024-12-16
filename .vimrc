@@ -7,7 +7,6 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
-let $PATH = $PATH . ':' . expand('~/.pyenv/shims')
 "" Git
 Plugin 'tpope/vim-fugitive'
 " gitgutter shows changes since revision but can add lots of lag
@@ -53,7 +52,6 @@ Plugin  'tpope/vim-speeddating'
 
 "" Additonal Functionality
 Plugin 'nathangrigg/vim-beancount'
-Plugin 'lambdalisue/vim-pyenv'
 " GNU recutils syntax and folding
 Plugin 'zaid/vim-rec'
 " Transposte text
@@ -144,6 +142,8 @@ let g:vimwiki_folding='custom'
 if has("gui_running")
   if hostname() =~ '^LA'
     set guifont=Menlo:h12 " personal machine
+    Plugin 'lambdalisue/vim-pyenv'
+    let $PATH = $PATH . ':' . expand('~/.pyenv/shims') " work machine doesn't use pyenv
   else
     set guifont=Menlo:h14 " work machines
   endif
