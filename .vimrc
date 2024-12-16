@@ -7,7 +7,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
-let $PATH = $PATH . ':/Users/lucasaleck/.pyenv/shims'
+let $PATH = $PATH . ':' . expand('~/.pyenv/shims')
 "" Git
 Plugin 'tpope/vim-fugitive'
 " gitgutter shows changes since revision but can add lots of lag
