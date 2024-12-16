@@ -22,7 +22,7 @@ Plugin 'vim-airline/vim-airline-themes'
 
 "" Navigation
 Plugin 'tpope/vim-unimpaired'
-Plugin 'kien/ctrlp.vim'
+Plugin 'kien/ctrlp.vim' " should also look into command-t plugin
 " Plugin 'preservim/nerdtree'
 Plugin 'tpope/vim-vinegar'
 
@@ -164,7 +164,7 @@ set tabstop=2 " number of spaces a tab counts for, my files rarely have actual t
 set softtabstop=2 " how many spaces a tab press inserts
 set shiftwidth=2 " indentation by 2 spaces
 set autoindent
-set breakindent
+set breakindent " wrapped lines continue visually indented
 
 set textwidth=0
 set formatoptions=tcqj
@@ -247,6 +247,7 @@ nnoremap <Left> zc
 nnoremap <Right> zo
 
 " go back to last buffer (more ergonomic to use ctrl-p buffers)
+" maybe try gb for this
 nnoremap <c-_> <c-^>
 nnoremap <Leader>q :q<CR>
 
@@ -269,6 +270,9 @@ cnoremap <c-n> <Down>
 " make n/N always go in the same direction and keep search cursor centered
 nnoremap <expr> n 'Nn'[v:searchforward] . "zzzv"
 nnoremap <expr> N 'nN'[v:searchforward] . "zzzv"
+" repeatable replace word under cursor
+nnoremap c* *``cgn
+nnoremap c# #``cgN
 
 " Use %% as macro for current buffer's directory from Practical Vim
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -301,7 +305,7 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 "
 " Commands and Functions
 "
-command! Diff vert diffsplit ~/.vim/backup/%:t~
+" command! Diff vert diffsplit ~/.vim/backup/%:t~
 command! ClearRegs for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
 " Pretty Print JSON, HTML, and XML (set vim directory to match file)
 command! PPJ %!python -m json.tool
@@ -323,9 +327,9 @@ function SetBeancount()
   setlocal textwidth=0
   " make price directives from highlighted text copy/pasted from sheets
   vnoremap <buffer> <Leader>p :s/^.*$/<C-R>=strftime("%Y-%m-%d")<CR> price \0 USD/<CR>
-  " jump to my bean headings (this is lazy should save off existing ? and / registers and restore
-  nnoremap <buffer> [[ ?\*\*\*\*<CR>
-  nnoremap <buffer> ]] /\*\*\*\*<CR>
+  " jump between bean accounts
+  nnoremap <buffer> [[ zk
+  nnoremap <buffer> ]] zj
 endfunction
 
 autocmd BufEnter fugitive://* setlocal foldmethod=syntax
@@ -335,7 +339,7 @@ autocmd BufEnter *.wiki call SetVimWiki()
 function SetVimWiki()
   " setlocal textwidth=0
   setlocal nofoldenable
-  setlocal spell
+  " setlocal spell
   " ignore sentences or phrases that start with lowercase word
   setlocal spellcapcheck=
   syn match myExCapitalWords +\<[A-Z]\w*\>+ contains=@NoSpell
