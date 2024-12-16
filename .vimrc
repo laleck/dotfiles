@@ -62,7 +62,7 @@ Plugin 'salsifis/vim-transpose'
 Plugin 'EvanQuan/vmath-plus'
 " Quick search based on highlighted text
 Plugin 'nelstrom/vim-visual-star-search'
-Plugin 'vimwiki/vimwiki'
+Plugin 'aleck2/vimwiki-dev' " has glp key binding for previous task
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -107,6 +107,10 @@ nnoremap <leader>ge :Gedit<CR>
 " this shows all versions for current file
 nnoremap <leader>gll :0GcLog<CR>
 nnoremap <leader>gv :Gvdiffsplit<CR>
+
+" vimwiki but using for across all filetypes
+nnoremap gl< <Plug>VimwikiDecrementListItem
+nnoremap gl> <Plug>VimwikiIncrementListItem
 
 let g:tex_flavor = 'latex'
 " On write, update browser/preview
