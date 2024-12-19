@@ -61,10 +61,12 @@ Plugin 'EvanQuan/vmath-plus'
 " Quick search based on highlighted text
 Plugin 'nelstrom/vim-visual-star-search'
 Plugin 'aleck2/vimwiki-dev' " has glp key binding for previous task
+" Plugin 'junegunn/vader.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 filetype plugin on           " vimwiki wants this
+runtime! ftplugin/man.vim    " view man pages from vim
 
 "
 " Plugin options, variables, and remaps
@@ -191,7 +193,7 @@ set updatetime=100 " amount of time between swp writes (like for gitgutter)
 set gdefault " default g substitute flag (all occurences on line). Add g in search to negate this; gg to ensure on
 set ignorecase
 set nohlsearch " turn off search highlighting think this is also controlled by h in viminfo
-set nowrapscan " stop search at end of file
+" set nowrapscan " stop search at end of file
 let g:loaded_matchparen=1 " think this turns off matching open/close brace highlighting
 
 set undofile " persistent undo
