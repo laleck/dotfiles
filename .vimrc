@@ -174,6 +174,7 @@ set breakindent " wrapped lines continue visually indented
 
 set textwidth=0
 set formatoptions=tcqj
+set scrolloff=7 "min number of screen lines to keep above/below cursor
 
 set foldmethod=syntax
 set nofoldenable " turn off folding by default; toggle with zi
@@ -193,7 +194,7 @@ set updatetime=100 " amount of time between swp writes (like for gitgutter)
 set gdefault " default g substitute flag (all occurences on line). Add g in search to negate this; gg to ensure on
 set ignorecase
 set nohlsearch " turn off search highlighting think this is also controlled by h in viminfo
-" set nowrapscan " stop search at end of file
+set nowrapscan " stop search at end of file
 let g:loaded_matchparen=1 " think this turns off matching open/close brace highlighting
 
 set undofile " persistent undo
