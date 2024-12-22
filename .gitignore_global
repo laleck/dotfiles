@@ -61,3 +61,4 @@ desktop.ini
 .idea
 .iml
 *.sublime-workspace
+.python-version
