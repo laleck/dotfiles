@@ -217,19 +217,14 @@ syn match myExCapitalWords +\<[A-Z]\w*\>+ contains=@NoSpell "IF IM YELLIN IDC BO
 inoremap jj <Esc>
 
 " Cancel the default behavior of d, D, c, C - do not save deletions into register (except for `-` with c, C)
-" noremap should cover normal, visual, select, operator pending
-noremap d "_d
-noremap D "_D
-noremap c "_c
-noremap C "_C
-" nnoremap d "_d
-" vnoremap d "_d
-" nnoremap D "_D
-" vnoremap D "_D
-" nnoremap c "_c
-" vnoremap c "_c
-" nnoremap C "_C
-" vnoremap C "_C
+nnoremap d "_d
+vnoremap d "_d
+nnoremap D "_D
+vnoremap D "_D
+nnoremap c "_c
+vnoremap c "_c
+nnoremap C "_C
+vnoremap C "_C
 
 " override default L and H methods, go to first/last character of line
 noremap H ^
