@@ -226,6 +226,9 @@ vnoremap c "_c
 nnoremap C "_C
 vnoremap C "_C
 
+" paste over currently selected text without yanking deleted text
+xnoremap p P
+
 " override default L and H methods, go to first/last character of line
 noremap H ^
 noremap L g_
