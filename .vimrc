@@ -1,4 +1,3 @@
-" testing my local git
 let mapleader=" " "this should be asssigned before it's referenced
 " set nocompatible              " guess this is no longer required
 filetype off " required
