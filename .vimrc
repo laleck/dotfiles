@@ -267,7 +267,6 @@ nnoremap J mzJ`z
 " insert iso-8601 date on new line below cursor and enter input
 nnoremap <leader>O O<C-R>=strftime("%Y-%m-%d\n")<CR>
 nnoremap <leader>o o<C-R>=strftime("%Y-%m-%d\n")<CR>
-" prepend current date and append USD (use for beancount price directives)
 
 nnoremap <leader>fo :set formatoptions-=a;set tw=0<CR>
 nnoremap <leader>cr :ClearRegs<CR>
@@ -329,34 +328,55 @@ augroup MyMarks
   autocmd BufEnter q&a.txt if line("'R") > 1 | execute "normal! ggmR" | endif
 augroup END
 
-" autocmd
-" BufEnter when open/switch to buffer; Bufread when :e file (usually once)
-autocmd BufNewFile,BufRead *.bean call SetBeancount()
+" autocmd! breaking plugins. Sourcing these commands n-times is nbd
+augroup beancount
+  " autocmd! breaks beancount plugin
+  " echom "beancount"
+  " could do a slick
+  autocmd BufNewFile,BufRead *.bean call SetBeancount()
+augroup END
+
 function SetBeancount()
+  PyenvActivate
   setlocal foldopen-=block
   setlocal textwidth=0
   " make price directives from highlighted text copy/pasted from sheets
   vnoremap <buffer> <Leader>p :s/^.*$/<C-R>=strftime("%Y-%m-%d")<CR> price \0 USD/<CR>
-  " jump to my bean headings (zi and zj don't quite work)
-  nnoremap <buffer> [[ ?\*\*\*\*<CR>
-  nnoremap <buffer> ]] /\*\*\*\*<CR>
+  " jump to headings; folding unreliable in plugin, can't rely on: z[ z] & zj/zk
+  nnoremap <buffer> <silent> [[ :call search('^\V****', 'Wb')<CR>zz
+  nnoremap <buffer> <silent> ]] :call search('^\V****', 'W')<CR>zz
+  " easier search for headings
+  cnoremap <buffer> ?? ^\V****\v.*
 endfunction
 
-autocmd BufEnter fugitive://* setlocal foldmethod=syntax
+augroup fugitive
+  " autocmd!
+  " echom "fugitive"
+  autocmd BufEnter fugitive://* setlocal foldmethod=syntax
+augroup END
 
-" autocmd BufRead *.wiki call SetVimWiki()
-autocmd BufEnter *.wiki call SetVimWiki()
+augroup vimwiki
+  " autocmd! breaks vimwiki plugin
+  autocmd BufEnter *.wiki call SetVimWiki()
+augroup END
+
 function SetVimWiki()
-  " setlocal textwidth=0
+  " could probably tweak g vars for similar affect
   setlocal nofoldenable
+  " setlocal textwidth=0
   " setlocal spell
   " ignore sentences or phrases that start with lowercase word
   setlocal spellcapcheck=
+  " could add syn match to plugin syntax file
   syn match myExCapitalWords +\<[A-Z]\w*\>+ contains=@NoSpell
   setlocal modeline " these other settings are overriding my modelines, this restores it
 endfunction
 
-autocmd BufNewFile,BufRead *.md,*.txt call SetPlaintext()
+augroup plaintext
+  " autocmd!
+  autocmd BufNewFile,BufRead *.md,*.txt call SetPlaintext()
+augroup END
+
 function SetPlaintext()
     setlocal textwidth=0 " no text width limit. If using this,j remove 'a' from format options
     " setlocal fo+=a " paragraphs all on 1 line. sets tw=79 at a minimum. continuously enforce tw limits when inserting on existing line.
