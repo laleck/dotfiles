@@ -436,7 +436,8 @@ function! TodoSearch(filepattern)
     endif
 
     silent! execute 'cexpr []'
-    silent! execute 'vimgrep /\[.\]/ ' . l:filepattern
+    silent! execute 'vimgrep /\[ ]/ ' . l:filepattern
+    " silent! execute 'vimgrep /\[.\]/ ' . l:filepattern
     copen
 endfunction
 command! TODO execute 'call TodoSearch("~/vimwiki/**/*.wiki")'
