@@ -62,3 +62,4 @@ desktop.ini
 .iml
 *.sublime-workspace
 .python-version
+.python-local
