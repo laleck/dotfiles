@@ -1,0 +1,86 @@
+{
+    "workbench.colorTheme": "Default Dark Modern",
+    "vim.vimrc.enable": true,
+    "vim.foldfix": true,
+    "files.associations": {
+        "*.txt": "plaintext"
+    },
+    "[plaintext]": {
+        "editor.wordWrap": "on"
+    },
+    "security.workspace.trust.untrustedFiles": "open",
+    "editor.find.loop": false,
+    "editor.formatOnSave": false, // turn back on. only want this as false for js
+    "editor.formatOnType": false, // turn back on. only want this as false for js
+    // "pylint.args": [
+    //     "args: [--disable=all, --enable=unused-import]"
+    // ],
+    "markdown.preview.doubleClickToSwitchToEditor": false,
+    "vim.digraphs": {},
+    "notebook.editorOptionsCustomizations": {},
+    "explorer.autoReveal": false,
+    "gitlens.views.branches.branches.layout": "list",
+    "gitlens.views.commits.files.layout": "list",
+    "gitlens.views.branches.files.layout": "list",
+    "snowflake.queryHistory.itemLimit": 100,
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                "g",
+                "f"
+            ],
+            // "after": [
+            //     "v",
+            //     "i",
+            //     "w"
+            // ],
+            "commands": [
+                {
+                    "command": "editor.action.revealDefinition"
+                },
+            ],
+        },
+        {
+            "before": ["]", "c"],
+            "commands": ["workbench.action.compareEditor.nextChange"]
+        },
+        {
+            "before": ["[", "c"],
+            "commands": ["workbench.action.compareEditor.previousChange"]
+        },
+    ],
+    "sqlfluff.executablePath": "put_sensitive_file_path_back",
+    "sqlfluff.config": "put_sensitive_file_path_back",
+    "accessibility.signals.terminalBell": {
+        "sound": "off",
+        "announcement": "off"
+    },
+    "window.openFoldersInNewWindow": "on",
+    "terminal.integrated.scrollback": 4000,
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "snowflake.connectionsConfigFile": "/Users/lucas.aleck/.snowflake/connections.toml",
+    "gitlens.views.commits.showBranchComparison": false,
+    "scm.showHistoryGraph": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "python.analysis.userFileIndexingLimit": 3000,
+    "files.exclude": {
+        "**/.git": false
+    },
+    "editor.wordWrap": "off",
+    "vscode-postgres.defaultConnection": "Web App [Dev]",
+    "flake8.args": [
+        "--select=DOC",
+        "--ignore=DOC402,DOC301,DOC111"
+    ],
+    "ruff.configuration": "put_sensitive_file_path_back",
+    "ruff.lint.args": [
+        "--unsafe-fixes"
+    ],
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmPasteNative": false,
+    "explorer.confirmDelete": false,
+    "vscode-postgres.virtualFolders": [
+        "functions"
+    ]
+    
+}
