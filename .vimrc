@@ -60,7 +60,7 @@ Plugin 'salsifis/vim-transpose'
 Plugin 'EvanQuan/vmath-plus'
 " Quick search based on highlighted text
 Plugin 'nelstrom/vim-visual-star-search'
-Plugin 'aleck2/vimwiki-dev' " has glp key binding for previous task
+Plugin 'laleck/vimwiki-dev' " has glp key binding for previous task
 " Plugin 'junegunn/vader.vim'
 
 call vundle#end()            " required
