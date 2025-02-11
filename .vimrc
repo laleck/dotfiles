@@ -337,6 +337,7 @@ augroup beancount
 augroup END
 
 function SetBeancount()
+  cd %:p:h
   PyenvActivate
   setlocal foldopen-=block
   setlocal textwidth=0
