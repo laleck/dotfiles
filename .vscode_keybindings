@@ -10,6 +10,27 @@
         "key": "ctrl+w ctrl+w",
         "command": "diffEditor.switchSide"
     },
+    // I think VS Code with Vim plugin pulls my unimpaired ]c and [c bindings for git chunks. This may conflict to an extent
+    {
+        "key": "] c",
+        "command": "merge.goToNextUnhandledConflict",
+        "when": "isMergeEditor"
+    },
+    {
+        "key": "[ c",
+        "command": "merge.goToPreviousUnhandledConflict",
+        "when": "isMergeEditor"
+    },
+    {
+        "key": "] e",
+        "command": "editor.action.moveLinesDownAction",
+        "when": "editorTextFocus && vim.mode == 'Normal'"
+    },
+    {
+        "key": "[ e",
+        "command": "editor.action.moveLinesUpAction",
+        "when": "editorTextFocus && vim.mode == 'Normal'"
+    },
     {
         "key": "cmd+k cmd+c",
         "command": "editor.action.commentLine",
@@ -197,5 +218,19 @@
     {
         "key": "shift+cmd+d",
         "command": "workbench.view.extension.snowflakeActivityBarContainer"
+    },
+    {
+        "key": "alt+down",
+        "command": "-editor.action.moveLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+up",
+        "command": "-editor.action.moveLinesUpAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+w ctrl+o",
+        "command": "workbench.action.editorLayoutSingle"
     },
 ]

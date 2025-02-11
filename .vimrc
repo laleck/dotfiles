@@ -257,8 +257,10 @@ nnoremap <Left> zc
 nnoremap <Right> zo
 
 " go back to last buffer (more ergonomic to use ctrl-p buffers)
-" maybe try gb for this
 nnoremap <c-_> <c-^>
+" trying multiple options out here
+nnoremap <BS> <c-^>
+nnoremap gb <c-^>
 nnoremap <Leader>q :q<CR>
 
 " keep cursor in place on joins. uses the z mark
@@ -364,6 +366,10 @@ augroup END
 function SetVimWiki()
   " could probably tweak g vars for similar affect
   setlocal nofoldenable
+  " remapping <BS> is not overriding <Plug>VimwikiGoBackLink
+  " nnoremap <buffer> <BS> <c-^>
+  " unmap <BS>
+  " nnoremap <BS> <c-^>
   " setlocal textwidth=0
   " setlocal spell
   " ignore sentences or phrases that start with lowercase word
