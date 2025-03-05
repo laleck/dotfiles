@@ -281,6 +281,11 @@ cnoremap <c-n> <Down>
 " make n/N always go in the same direction and keep search cursor centered
 nnoremap <expr> n 'Nn'[v:searchforward] . "zzzv"
 nnoremap <expr> N 'nN'[v:searchforward] . "zzzv"
+"
+" center after g; and g,
+nnoremap g; g;zzzv
+nnoremap g, g,zzzv
+
 " repeatable replace word under cursor
 nnoremap c* *``cgn
 nnoremap c# #``cgN
