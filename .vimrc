@@ -321,13 +321,12 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 "
 " Commands and Functions
 "
-" command! Diff vert diffsplit ~/.vim/backup/%:t~
 " transform vertical list into single comma delimited list for use in SQL where clause
-" nnoremap <Leader>ku :%s/foo//gg<CR>:%s/bar//gg<CR>
-nnoremap <Leader>ku :%s/,/\r/gg<CR>:%s/\v[,()']//gg"<CR>
-" nnoremap <Leader>ku :execute "%norm A',jjI'"<CR>:execute "%norm ggVGgJLr)HI("<CR>
 nnoremap <Leader>kk :execute "%norm A',jjI'"<CR>:execute "%norm ggVGgJLr)HI("<CR>
-command! MakeSQLClause execute "%norm A',jjI'" | execute "%norm ggVGgJLr)HI("
+" convert single line comma delimited list to vertical list
+" command! Diff vert diffsplit ~/.vim/backup/%:t~
+nnoremap <Leader>ku :%s/,/\r/gg<CR>:%s/\v[,()']//gg"<CR>
+
 command! ClearRegs for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
 " Pretty Print JSON, HTML, and XML (set vim directory to match file)
 command! PPJ %!python -m json.tool
